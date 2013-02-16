@@ -1,0 +1,47 @@
+{
+   "abstract" : "connect to HideMyAss.com (HMA) proxy servers using OpenVPN.",
+   "author" : [
+      "David Farrell <davidnmfarrell@gmail.com>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.112150",
+   "license" : [
+      "artistic_1"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Net-OpenVPN-ProxyManager-HMA",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.4"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Capture::Tiny" : "0.21",
+            "LWP::Simple" : "6",
+            "Moose" : "2.0603",
+            "Net::OpenVPN::ProxyManager" : "0.011",
+            "Net::SSLeay" : "1.48",
+            "Test::More" : "0.98",
+            "perl" : "v5.10.0"
+         }
+      }
+   },
+   "provides" : {
+      "Net::OpenVPN::ProxyManager::HMA" : {
+         "file" : "lib/Net/OpenVPN/ProxyManager/HMA.pm",
+         "version" : "0.011"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://opensource.org/licenses/artistic-license.php"
+      ]
+   },
+   "version" : "0.011"
+}

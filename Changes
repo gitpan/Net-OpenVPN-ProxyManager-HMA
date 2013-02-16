@@ -1,0 +1,7 @@
+Revision history for OpenVPN-ProxyManager
+
+0.011	16th February 2013
+	Re-published HMA as separate module (no code changes).
+
+0.01   	3rd February 2013
+	Released module as part of Net_OpenVPN-ProxyManager.
