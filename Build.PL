@@ -10,7 +10,7 @@ my $build = Module::Build->new(
 							 Net::SSLeay   				=> '1.48',
 							 Capture::Tiny 				=> '0.21',
 							 perl		   				=> '5.10.0',
-							 Net::OpenVPN::ProxyManager => '0.011',
+							 Net::OpenVPN::ProxyManager => '0.02',
 							},
 	configure_requires => { 'Module::Build' => 0.40 },
 );

@@ -49,7 +49,7 @@ TODO: {
     "placeholder date/time"       => qr(Date/time)
   );
 
-  module_boilerplate_ok('lib/OpenVPN/ProxyManager.pm');
+  module_boilerplate_ok('lib/Net/OpenVPN/ProxyManager/HMA.pm');
 
 
 }

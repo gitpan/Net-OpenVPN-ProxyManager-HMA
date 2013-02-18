@@ -7,7 +7,7 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    use_ok( 'OpenVPN::ProxyManager' ) || print "Bail out!\n";
+    use_ok( 'Net::OpenVPN::ProxyManager::HMA' ) || print "Bail out!\n";
 }
 
-diag( "Testing OpenVPN::ProxyManager $OpenVPN::ProxyManager::VERSION, Perl $], $^X" );
+diag( "Testing Net::OpenVPN::ProxyManager::HMA $Net::OpenVPN::ProxyManager::HMA::VERSION, Perl $], $^X" );

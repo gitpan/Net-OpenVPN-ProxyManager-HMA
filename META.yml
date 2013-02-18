@@ -15,15 +15,15 @@ name: Net-OpenVPN-ProxyManager-HMA
 provides:
   Net::OpenVPN::ProxyManager::HMA:
     file: lib/Net/OpenVPN/ProxyManager/HMA.pm
-    version: 0.011
+    version: 0.02
 requires:
   Capture::Tiny: 0.21
   LWP::Simple: 6
   Moose: 2.0603
-  Net::OpenVPN::ProxyManager: 0.011
+  Net::OpenVPN::ProxyManager: 0.02
   Net::SSLeay: 1.48
   Test::More: 0.98
   perl: v5.10.0
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 0.011
+version: 0.02
