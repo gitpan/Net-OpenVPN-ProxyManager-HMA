@@ -1,7 +1,13 @@
 Revision history for OpenVPN-ProxyManager
 
+0.021	24th February 2013
+		Fixed documentation POD.
+
+0.02	23rd February 2013
+		Added 'get_ip_address' method, updated HMA.t with a new test for the method, and a SKIP clause if no internet connection is detected.
+
 0.011	16th February 2013
-	Re-published HMA as separate module (no code changes).
+		Re-published HMA as separate module (no code changes).
 
 0.01   	3rd February 2013
-	Released module as part of Net_OpenVPN-ProxyManager.
+		Released module as part of Net_OpenVPN-ProxyManager.

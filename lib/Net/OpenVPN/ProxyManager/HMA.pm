@@ -4,7 +4,7 @@ use Moose;
 use 5.10.0;
 extends 'Net::OpenVPN::ProxyManager';
 
-our $VERSION = '0.02';
+our $VERSION = '0.021';
 
 has hma_server_list => (is => 'rw', isa => 'ArrayRef', builder => '_get_server_list');
 has hma_config 		=> (is => 'rw', isa => 'Str', builder => '_get_hma_config');
@@ -20,7 +20,10 @@ Net::OpenVPN::ProxyManager::HMA - connect to HideMyAss.com (HMA) proxy servers u
 	my $pm_hma = Net::OpenVPN::ProxyManager::HMA->new;
 	my $servers = $pm_hma->get_servers({ name => 'usa', proto => 'tcp'});
 	$pm_hma->connect_to_random_server($servers);
+
 	
+=cut
+
 
 =head1 DESCRIPTION
 
@@ -34,7 +37,7 @@ configuration (this is done at construction of the object).
 To login to the HMA proxy servers, you will need to have an active account with HMA 
 (http://hidemyass.com). I am not affiliated with HMA other than as a customer.
 
-See L<Net::OpenVPN::ProxyManager::HMA> for other dependencies.
+See L<Net::OpenVPN::ProxyManagerA> for other dependencies.
 
 =cut
 
@@ -77,12 +80,17 @@ construction - Net::OpenVPN::ProxyManager::HMA->new). If no arguments are passed
 method, it will return the entire arrayhash of available servers (approximately 350).
 
 The method accepts two optional string arguments as key value pairs:
--Name, this is a string of the location name. HMA provide a location name string in the 
- format: "Canada, Ontario, Toronto (LOC1 S1)".
--Proto, this is the protocol option and can be either TCP or UDP. Many of the HMA servers 
- accept both protocols.
 
-Example
+=over
+
+=item *
+Name, this is a string of the location name. HMA provide a location name string in the format: "Canada, Ontario, Toronto (LOC1 S1)".
+
+=item *
+Proto, this is the protocol option and can be either TCP or UDP. Many of the HMA servers accept both protocols.
+
+=back
+
 	my $usa_tcp_servers_arrayhash = $pm_hma->get_servers({name => 'usa', proto => 'tcp'});
 
 =cut
@@ -129,7 +137,6 @@ sub get_servers {
 This method will invoke the hma_connect method on a random server when this method is
 called with an arrayhash of servers (as returned by the get_servers method).
 
-Example
 	$pm_hma->connect_to_random_server($arrayhash_of_servers);
 
 =cut
@@ -147,15 +154,14 @@ The hma_connect method will initialise the OpenVPN program to a server with the 
 configuration. This method requires a hashref containing the attributes of the
 server (this is the same hashref format that is returned by the get_servers method).
 
-Example
 	my $pm_hma->hma_connect({
-			'ip' 		=> '104.202.33.5',
-			'name' 		=> 'Canada, Ontario, Toronto (LOC1 S1)',
-			'country_code' 	=> 'ca',
-			'tcp_flag'	=> 'TCP',
-			'udp_flag'	=> 'UDP',
-			'norandom_flag' => undefined
-		});
+		'ip' 			=> '104.202.33.5',
+		'name' 			=> 'Canada, Ontario, Toronto (LOC1 S1)',
+		'country_code' 	=> 'ca',
+		'tcp_flag'		=> 'TCP',
+		'udp_flag'		=> 'UDP',
+		'norandom_flag' => undefined
+	});
 
 =cut
 
@@ -174,6 +180,19 @@ sub hma_connect {
 	$self->connect($hma_config);
 }
 
+=head2 get_ip_address
+
+Will return your current IP address or 0 if the ip lookup is not successful (uses an HMA web service).
+
+=cut
+
+sub get_ip_address {
+	my $self = shift;
+	my $ip_address = get('http://geoip.hidemyass.com/ip/');
+	$ip_address ? $ip_address : 0;
+}
+
+
 no Moose;
 1;
 
@@ -184,8 +203,7 @@ David Farrell, C<< <davidnmfarrell at gmail.com> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-net-openvpn-proxymanager-hma at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Net-OpenVPN-ProxyManager>.  I will be notified, and then you'll automatically be notified of 
-progress on your bug as I make changes.
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Net-OpenVPN-ProxyManager>.  I will be notified, and then you'll automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
