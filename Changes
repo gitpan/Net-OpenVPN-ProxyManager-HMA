@@ -1,5 +1,8 @@
 Revision history for OpenVPN-ProxyManager
 
+0.021	22nd April 2013
+		Moved internet dependent tests to within SKIP block in HMA.t. Changed HMA source scripts to http from https..
+
 0.021	24th February 2013
 		Fixed documentation POD.
 

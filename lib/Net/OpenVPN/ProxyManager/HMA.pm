@@ -4,7 +4,7 @@ use Moose;
 use 5.10.0;
 extends 'Net::OpenVPN::ProxyManager';
 
-our $VERSION = '0.021';
+our $VERSION = '0.03';
 
 has hma_server_list => (is => 'rw', isa => 'ArrayRef', builder => '_get_server_list');
 has hma_config 		=> (is => 'rw', isa => 'Str', builder => '_get_hma_config');
@@ -43,13 +43,13 @@ See L<Net::OpenVPN::ProxyManagerA> for other dependencies.
 
 sub _get_hma_config {
 	my $self = shift;
-	my $hma_config_string = get('https://securenetconnection.com/vpnconfig/openvpn-template.ovpn');	
+	my $hma_config_string = get('http://securenetconnection.com/vpnconfig/openvpn-template.ovpn');	
 	$hma_config_string ? $hma_config_string : 0;	
 }
 
 sub _get_server_list {
 	my $self = shift;
-	my $hma_server_list_string = get('https://securenetconnection.com/vpnconfig/servers-cli.php');
+	my $hma_server_list_string = get('http://securenetconnection.com/vpnconfig/servers-cli.php');
 	$hma_server_list_string ? $self->_parse_server_list_string($hma_server_list_string) : 0;
 }
 
@@ -75,7 +75,7 @@ sub _parse_server_list_string {
 
 =head2 get_servers
 
-This method returns an arrayhash of HMA servers available (the list is downloaded upon 
+Returns an arrayhash of HMA servers available (the list is downloaded upon 
 construction - Net::OpenVPN::ProxyManager::HMA->new). If no arguments are passed to this
 method, it will return the entire arrayhash of available servers (approximately 350).
 
@@ -125,6 +125,44 @@ sub get_servers {
 					$_->{name} =~ m/$server_params_hashref->{name}/i} @{$self->hma_server_list};
 			}	
 		}
+	}
+	else {
+		push @{$server_list_arrayhash}, $self->hma_server_list;
+	}
+	return $server_list_arrayhash;
+}
+
+=head2 get_servers_by_country_code
+
+Returns an arrayhash of HMA servers with a matching location. If no arguments are passed to this method, it will return the entire arrayhash of available servers. 
+
+=cut
+
+sub get_servers_by_country_code {
+	my ($self, $country_code) = @_;
+	my $server_list_arrayhash;	
+	if ($country_code){
+		push @{$server_list_arrayhash},	grep { 
+			$_->{country_code} =~ m/$country_code/i} @{$self->hma_server_list};
+	}
+	else {
+		push @{$server_list_arrayhash}, $self->hma_server_list;
+	}
+	return $server_list_arrayhash;
+}
+
+=head2 get_servers_by_name
+
+Returns an arrayhash of HMA severs with a matching name. If no arguments are passed to this method, it will return the entire arrayhash of available servers.
+
+=cut
+
+sub get_servers_by_name {
+	my ($self, $name) = @_;
+	my $server_list_arrayhash;	
+	if ($name){
+		push @{$server_list_arrayhash},	grep { 
+			$_->{name} =~ m/$name/i} @{$self->hma_server_list};
 	}
 	else {
 		push @{$server_list_arrayhash}, $self->hma_server_list;

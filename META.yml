@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   Module::Build: 0.4
 dynamic_config: 1
-generated_by: 'Module::Build version 0.4003, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Module::Build version 0.4004, CPAN::Meta::Converter version 2.130880'
 license: artistic
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +15,7 @@ name: Net-OpenVPN-ProxyManager-HMA
 provides:
   Net::OpenVPN::ProxyManager::HMA:
     file: lib/Net/OpenVPN/ProxyManager/HMA.pm
-    version: 0.021
+    version: 0.03
 requires:
   LWP::Simple: 6
   Moose: 2.0603
@@ -23,4 +23,4 @@ requires:
   perl: v5.10.0
 resources:
   license: http://opensource.org/licenses/artistic-license.php
-version: 0.021
+version: 0.03
